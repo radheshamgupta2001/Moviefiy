@@ -1,13 +1,11 @@
 import React from "react";
 import {
-  Modal,
   Typography,
   Button,
   ButtonGroup,
   Grid,
   Box,
   CircularProgress,
-  useMediaQuery,
   Rating,
 } from "@mui/material";
 import {
@@ -25,17 +23,15 @@ import genreIcons from "../../assets/genres";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useStyles from "./style.js";
-import { useGetMovieQuery} from "../../services/TMDB";
+import { useGetMovieQuery } from "../../services/TMDB";
 
 const MovieInformation = () => {
   const { id } = useParams();
   const { data, isFetching, error } = useGetMovieQuery(id);
   const classes = useStyles();
   const dispatch = useDispatch();
-  const isMovieFavorited = false; 
-  const isMovieWatchlisted = false; 
-   
-
+  const isMovieFavorited = false;
+  const isMovieWatchlisted = false;
 
   const addToFavorites = () => {
     // Logic for adding to favorites
@@ -45,7 +41,6 @@ const MovieInformation = () => {
     // Logic for adding to watchlist
   };
 
-  
   if (isFetching) {
     return (
       <Box
@@ -104,14 +99,26 @@ const MovieInformation = () => {
         </Typography>
         <Grid item className={classes.containerSpaceAround}>
           <Box display="flex" alignItems="center">
-            <Rating readOnly value={data.vote_average / 2 || 0} precision={0.1} />
-            <Typography variant="subtitle1" gutterBottom style={{ marginLeft: "10px" }}>
-              {data.vote_average ? `${data.vote_average} / 10` : "Rating not available"}
+            <Rating
+              readOnly
+              value={data.vote_average / 2 || 0}
+              precision={0.1}
+            />
+            <Typography
+              variant="subtitle1"
+              gutterBottom
+              style={{ marginLeft: "10px" }}
+            >
+              {data.vote_average
+                ? `${data.vote_average} / 10`
+                : "Rating not available"}
             </Typography>
           </Box>
           <Typography variant="h6" align="center" gutterBottom>
             {data.runtime ? `${data.runtime} min` : "Runtime not available"}{" "}
-            {data.spoken_languages?.length > 0 ? ` / ${data.spoken_languages[0].name}` : ""}
+            {data.spoken_languages?.length > 0
+              ? ` / ${data.spoken_languages[0].name}`
+              : ""}
           </Typography>
         </Grid>
         <Grid item className={classes.genresContainer}>
@@ -142,7 +149,9 @@ const MovieInformation = () => {
         <Typography variant="h5" gutterBottom style={{ marginTop: "10px" }}>
           Overview
         </Typography>
-        <Typography style={{ marginBottom: "2rem" }}>{data.overview}</Typography>
+        <Typography style={{ marginBottom: "2rem" }}>
+          {data.overview}
+        </Typography>
         <Typography variant="h5" gutterBottom>
           Top Cast
         </Typography>
@@ -176,7 +185,7 @@ const MovieInformation = () => {
           <div className={classes.buttonsContainer}>
             <Grid item xs={12} sm={6} className={classes.buttonsContainer}>
               <ButtonGroup size="small" variant="outlined">
-                {data.homepage && data.homepage.startsWith('http') && (
+                {data.homepage && data.homepage.startsWith("http") && (
                   <Button
                     target="_blank"
                     rel="noopener noreferrer"
@@ -203,7 +212,9 @@ const MovieInformation = () => {
               <ButtonGroup size="medium" variant="outlined">
                 <Button
                   onClick={addToFavorites}
-                  endIcon={isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />}
+                  endIcon={
+                    isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />
+                  }
                 >
                   {isMovieFavorited ? "Unfavorite" : "Favorite"}
                 </Button>

@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
-import { useGetMoviesQuery } from '../../services/TMDB';
-import { useSelector } from 'react-redux';
-import {MovieList} from '..';
-import { Box, CircularProgress, Typography } from '@mui/material';
-import {selectGenreOrCategory } from '../../features/currentGenreOrCategory'
+import React, { useState } from "react";
+import { useGetMoviesQuery } from "../../services/TMDB";
+import { useSelector } from "react-redux";
+import { MovieList } from "..";
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 const Movies = () => {
-  const [page,setpPage] = useState(1);
-  const {genreIdOrCategoryName, searchQuery} = useSelector((state) => state.currentGenreOrCategory);
-  const { data, error, isFetching } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery});
+  const [page] = useState(1);
+  const { genreIdOrCategoryName, searchQuery } = useSelector(
+    (state) => state.currentGenreOrCategory
+  );
+  const { data, error, isFetching } = useGetMoviesQuery({
+    genreIdOrCategoryName,
+    page,
+    searchQuery,
+  });
 
   if (isFetching) {
     return (
-      <Box display='flex' justifyContent="center">
-        <CircularProgress size='4rem' />
+      <Box display="flex" justifyContent="center">
+        <CircularProgress size="4rem" />
       </Box>
     );
   }
 
   if (error) {
-    return 'An error has occurred.';
+    return "An error has occurred.";
   }
 
   if (!data || !data.results || data.results.length === 0) {
@@ -32,9 +37,7 @@ const Movies = () => {
     );
   }
 
-  return (
-    <MovieList movies={data.results} />
-  );
+  return <MovieList movies={data.results} />;
 };
 
 export default Movies;
