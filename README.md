@@ -18,7 +18,7 @@
 
 ## Demo
 
-[Link to the live demo](https://2kz379-3000.csb.app/)
+[Link to the live demo](https://vedicvistar.netlify.app/)
 
 ## Snapshot
 
