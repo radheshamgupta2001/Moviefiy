@@ -1,5 +1,5 @@
 
-# VedicVistar - Radheshyam
+# Moviefiy - Radheshyam
 
 **Note:** Use VPN because movie data is coming from TMDb API, which is not working in India. First, connect with VPN, and then it will work.
 
